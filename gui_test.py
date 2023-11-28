@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-
+from PIL import Image, ImageTk
 # Function to create the main menu
 def create_main_menu(root):
     # Clear current content
@@ -68,17 +68,17 @@ def create_feature_page(root, feature_name, image_paths):
         nonlocal current_image_index
         current_image_index[0] += delta
         current_image_index[0] = max(0, min(current_image_index[0], len(image_paths) - 1))
-        # Load the image
-        image = tk.PhotoImage(file=image_paths[current_image_index[0]])
-        '''
-        # Increase the image size using zoom
-        image = image.zoom(2, 2)  # Double the size of the image
-        '''
-        # Reduce the image size using subsample
-        image = image.subsample(3, 3)  # Then reduce to one third
+        # Open the image using PIL
+        pil_image = Image.open(image_paths[current_image_index[0]])
 
-        image_label.config(image=image)
-        image_label.image = image  # Keep a reference to prevent garbage-collection
+        # Resize the image to a fixed size (e.g., 300x300)
+        pil_image = pil_image.resize((1400, 950), Image.Resampling.LANCZOS)
+
+        # Convert the PIL image to a Tkinter-compatible image
+        tk_image = ImageTk.PhotoImage(pil_image)
+
+        image_label.config(image=tk_image)
+        image_label.image = tk_image  # Keep a reference to prevent garba
 
     # Clear current content
     for widget in root.winfo_children():
