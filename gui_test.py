@@ -3,11 +3,76 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 import threading
 import pyautogui
+import pygame
 
+
+#initialize pygame mixer
+pygame.mixer.init()
+###################AUDIO FUNCTIONS#################################################
+# Global variable to track if the menu audio has been played
+has_played_menu_audio = False
+# Global variable for sound state
+is_sound_on = True
+
+# Function to play menu audio
+def play_menu_audio():
+    audio_file = 'menu_audio/menu_audio.mp3'
+    pygame.mixer.music.load(audio_file)
+    pygame.mixer.music.play()
+
+
+# Function to play audio for Edge tutorial
+def play_edge_audio(index):
+    if is_sound_on:
+        audio_files = ['edge_audio/edge_pt1.mp3', 'edge_audio/edge_pt2.mp3']
+        if index < len(audio_files):
+            pygame.mixer.music.load(audio_files[index])
+            pygame.mixer.music.play()
+
+# Function to play audio for file explorer tutorial
+def play_file_explorer_audio(index):
+    if is_sound_on:
+        audio_files = ['file_explorer_audio/file_pt1.mp3', 'file_explorer_audio/file_pt2.mp3', 'file_explorer_audio/file_pt3.mp3', 'file_explorer_audio/file_pt4.mp3', 'file_explorer_audio/file_pt5.mp3']
+        if index < len(audio_files):
+            pygame.mixer.music.load(audio_files[index])
+            pygame.mixer.music.play()
+
+# Function to play audio for Edge tutorial
+def play_folder_audio(index):
+    if is_sound_on:
+        audio_files = ['folder_audio/folder_pt1.mp3', 'folder_audio/folder_pt2.mp3', 'folder_audio/folder_pt3.mp3']
+        if index < len(audio_files):
+            pygame.mixer.music.load(audio_files[index])
+            pygame.mixer.music.play()
+
+
+# Function to play audio for file explorer tutorial
+def play_mail_audio(index):
+    if is_sound_on:
+        audio_files = ['mail_audio/mail_pt1.mp3', 'mail_audio/mail_pt2.mp3', 'mail_audio/mail_pt3.mp3', 'mail_audio/mail_pt4.mp3', 'mail_audio/mail_pt5.mp3', 'mail_audio/mail_pt6.mp3']
+        if index < len(audio_files):
+            pygame.mixer.music.load(audio_files[index])
+            pygame.mixer.music.play()
+
+# Function to play audio for Task Manager tutorial
+def play_task_audio(index):
+    if is_sound_on:
+        audio_files = ['task_manager_audio/task_pt1.mp3', 'task_manager_audio/task_pt2.mp3',
+                       'task_manager_audio/task_pt3.mp3']  # Add more as needed
+        if index < len(audio_files):
+            pygame.mixer.music.load(audio_files[index])
+            pygame.mixer.music.play()
+
+
+#######################################################################################
 
 # Function to create the main menu
 def create_main_menu(root):
-    # Clear current content
+    global has_played_menu_audio
+    if not has_played_menu_audio:
+        play_menu_audio()  # Play menu audio only if it hasn't been played before
+        has_played_menu_audio = True  # sets the flag to True after playing
+
     for widget in root.winfo_children():
         widget.destroy()
 
@@ -24,7 +89,7 @@ def create_main_menu(root):
     tutorial_button.pack(pady=10)
 
     # Run Test Button
-    run_test_button = ttk.Button(main_frame, text="Run Test")
+    run_test_button = ttk.Button(main_frame, text="Test Run")
     run_test_button.pack(pady=10)
 
 # Function to create the tutorial page
@@ -775,56 +840,82 @@ def create_feature_page(root, feature_name, image_paths):
         # Start the mouse movement in a separate thread to avoid blocking the GUI
         if feature_name == "Edge":
             if current_image_index[0] == 0:  # First image in Edge tutorial
+                play_edge_audio(current_image_index[0])
                 threading.Thread(target=mouse_edge_pt1).start()
             elif current_image_index[0] == 1:  # Second image in Edge tutorial
+                play_edge_audio(current_image_index[0])
                 threading.Thread(target=mouse_edge_pt2).start()
 
         if feature_name == "File Explorer":
             if current_image_index[0] == 0:  # First image in File Explorer tutorial
+                play_file_explorer_audio(current_image_index[0])
                 threading.Thread(target=mouse_file_explorer_pt1).start()
             elif current_image_index[0] == 1:  # Second image
+                play_file_explorer_audio(current_image_index[0])
                 threading.Thread(target=mouse_file_explorer_pt2).start()
             elif current_image_index[0] == 2:  # Third image
+                play_file_explorer_audio(current_image_index[0])
                 threading.Thread(target=mouse_file_explorer_pt3).start()
             elif current_image_index[0] == 3:  # Fourth image
+                play_file_explorer_audio(current_image_index[0])
                 threading.Thread(target=mouse_file_explorer_pt4).start()
             elif current_image_index[0] == 4:  # Fifth image
+                play_file_explorer_audio(current_image_index[0])
                 threading.Thread(target=mouse_file_explorer_pt5).start()
 
 
         if feature_name == "Create Folder":
             if current_image_index[0] == 0:  # First image in File Explorer tutorial
+                play_folder_audio(current_image_index[0])
                 threading.Thread(target=mouse_create_folder_pt1).start()
             elif current_image_index[0] == 1:  # Second image
+                play_folder_audio(current_image_index[0])
                 threading.Thread(target=mouse_create_folder_pt2).start()
             elif current_image_index[0] == 2:  # Third image
+                play_folder_audio(current_image_index[0])
                 threading.Thread(target=mouse_create_folder_pt3).start()
+
 
 
         if feature_name == "Mail App":
             if current_image_index[0] == 0:  # First image in File Explorer tutorial
+                play_mail_audio(current_image_index[0])
                 threading.Thread(target=mouse_mail_app_pt1).start()
             elif current_image_index[0] == 1:  # Second image
+                play_mail_audio(current_image_index[0])
                 threading.Thread(target=mouse_mail_app_pt2).start()
             elif current_image_index[0] == 2:  # Third image
+                play_mail_audio(current_image_index[0])
                 threading.Thread(target=mouse_mail_app_pt3).start()
             elif current_image_index[0] == 3:  # Fourth image
+                play_mail_audio(current_image_index[0])
                 threading.Thread(target=mouse_mail_app_pt4).start()
             elif current_image_index[0] == 4:  # Fifth image
+                play_mail_audio(current_image_index[0])
                 threading.Thread(target=mouse_mail_app_pt5).start()
             elif current_image_index[0] == 5:  # Sixth image
+                play_mail_audio(current_image_index[0])
                 threading.Thread(target=mouse_mail_app_pt6).start()
 
 
         if feature_name == "Task Manager":
             if current_image_index[0] == 0:  # First image in Task Manager tutorial
+                play_task_audio(current_image_index[0])
                 threading.Thread(target=mouse_task_manager_pt1).start()
             elif current_image_index[0] == 1:  # Second image
+                play_task_audio(current_image_index[0])
                 threading.Thread(target=mouse_task_manager_pt2).start()
             elif current_image_index[0] == 2:  # Third image
+                play_task_audio(current_image_index[0])
                 threading.Thread(target=mouse_task_manager_pt3).start()
         ###################################################################
 
+    def toggle_sound():
+        global is_sound_on
+        is_sound_on = not is_sound_on
+        sound_off_button.config(text="Sound On" if is_sound_on else "Sound Off")
+        if not is_sound_on:
+            pygame.mixer.music.stop()  # Stop playing any ongoing audio
 
     # Clear current content
     for widget in root.winfo_children():
@@ -849,7 +940,7 @@ def create_feature_page(root, feature_name, image_paths):
     next_button = ttk.Button(nav_frame, text="Next", command=lambda: update_image(1))
     next_button.grid(row=0, column=1, padx=5)
 
-    sound_off_button = ttk.Button(nav_frame, text="Sound Off")  # No command attached
+    sound_off_button = ttk.Button(nav_frame, text="Sound On/Off", command=toggle_sound)  # No command attached
     sound_off_button.grid(row=0, column=2, padx=5)
 
     main_menu_button = ttk.Button(nav_frame, text="Main Menu", command=lambda: create_main_menu(root))
