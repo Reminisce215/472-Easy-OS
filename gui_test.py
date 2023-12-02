@@ -958,6 +958,9 @@ def create_feature_page(root, feature_name, image_paths):
 root = tk.Tk()
 root.title("Easy_OS Interface")
 
+# Set the window to full screen
+root.attributes('-fullscreen', True)
+
 # Initialize main menu
 create_main_menu(root)
 
