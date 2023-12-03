@@ -5,6 +5,33 @@ import threading
 import pyautogui
 import pygame
 import time
+import os
+import psutil
+import pygetwindow as gw
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+
+
+# Global variable to track folder creation
+is_folder_created = False
+#watchdog observer checks whether a folder has been during runtime
+class MyHandler(FileSystemEventHandler):
+    def on_created(self, event):
+        global is_folder_created
+        if event.is_directory:
+            print(f"Directory created: {event.src_path}")
+            is_folder_created = True
+
+def start_watchdog_observer():
+    path = os.path.join(os.path.expanduser('~'), 'Desktop')
+    event_handler = MyHandler()
+    observer = Observer()
+    observer.schedule(event_handler, path, recursive=False)
+    observer.start()
+    return observer
+
+
+#########################################################################################################################
 
 #initialize pygame mixer
 pygame.mixer.init()
@@ -89,8 +116,198 @@ def create_main_menu(root):
     tutorial_button.pack(pady=10)
 
     # Run Test Button
-    run_test_button = ttk.Button(main_frame, text="Test Run")
+    run_test_button = ttk.Button(main_frame, text="Test Knowledge", command=lambda: create_test_knowledge_page(root))
     run_test_button.pack(pady=10)
+
+
+
+def create_test_knowledge_page(root):
+    # Clear current content
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    # Create main frame
+    main_frame = tk.Frame(root)
+    main_frame.pack(expand=True, fill='both')
+
+    # Title
+    title = tk.Label(main_frame, text="Test Your Knowledge", font=("Arial", 16))
+    title.pack(pady=10)
+
+    # Test Knowledge Buttons
+    test_buttons = {
+        "Test Folder": lambda: test_folder(root),
+        "Test Edge": lambda: test_edge(root),
+        "Test File Explorer": lambda: test_file_explorer(root),
+        "Test Mail": lambda: test_mail(root),
+        "Test Task Manager": lambda: test_task_manager(root),
+        "Main Menu": lambda: create_main_menu(root)
+    }
+
+    for text, command in test_buttons.items():
+        button = ttk.Button(main_frame, text=text, command=command)
+        button.pack(pady=5)
+
+#Test Folder Functionality
+def test_folder(root):
+    global is_folder_created
+    is_folder_created = False
+
+    # Clear current content
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    # Create main frame
+    main_frame = tk.Frame(root)
+    main_frame.pack(expand=True, fill='both')
+
+    # Start the observer in a separate thread
+    observer_thread = threading.Thread(target=start_watchdog_observer, daemon=True)
+    observer_thread.start()
+
+    def check_folder_creation():
+        if is_folder_created:
+            test_button.config(text="Good Job!", state="disabled")
+        else:
+            root.after(1000, check_folder_creation)  # Check again after 1 second
+
+    test_button = ttk.Button(main_frame, text="Test", command=lambda: check_folder_creation())
+    test_button.pack(pady=10)
+
+    # Main Menu Button
+    main_menu_button = ttk.Button(main_frame, text="Main Menu", command=lambda: create_main_menu(root))
+    main_menu_button.pack(pady=10)
+
+#checks whether edge process is running
+def is_edge_running():
+    "Check if Edge process is running"
+    for process in psutil.process_iter(['name']):
+        if 'msedge' in process.info['name'].lower():
+            return True
+    return False
+
+#test edge functionality
+def test_edge(root):
+    def check_edge_running():
+        if is_edge_running():
+            test_button.config(text="Good Job!", state="disabled")
+        else:
+            root.after(1000, check_edge_running)  # Check again after 1 second
+
+    # Clear current content
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    # Create main frame
+    main_frame = tk.Frame(root)
+    main_frame.pack(expand=True, fill='both')
+
+    # Test Button
+    test_button = ttk.Button(main_frame, text="Test", command=lambda: check_edge_running())
+    test_button.pack(pady=10)
+
+    # Main Menu Button
+    main_menu_button = ttk.Button(main_frame, text="Main Menu", command=lambda: create_main_menu(root))
+    main_menu_button.pack(pady=10)
+
+
+# Function to check if File Explorer is open
+def is_file_explorer_open():
+    explorer_titles = ["Quick access", "Home", "Documents", "Downloads", "Pictures", "Desktop"]
+    for win in gw.getAllWindows():
+        if any(title in win.title for title in explorer_titles):
+            return True
+    return False
+
+# Test File Explorer
+# Functionality
+def test_file_explorer(root):
+    def check_file_explorer_open():
+        if is_file_explorer_open():
+            test_button.config(text="Good Job!", state="disabled")
+        else:
+            root.after(1000, check_file_explorer_open)  # Check again after 1 second
+
+    # Clear current content
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    # Create main frame
+    main_frame = tk.Frame(root)
+    main_frame.pack(expand=True, fill='both')
+
+    # Test Button
+    test_button = ttk.Button(main_frame, text="Test", command=lambda: check_file_explorer_open())
+    test_button.pack(pady=10)
+
+    # Main Menu Button
+    main_menu_button = ttk.Button(main_frame, text="Main Menu", command=lambda: create_main_menu(root))
+    main_menu_button.pack(pady=10)
+# Function to check if Mail is open
+def is_mail_app_open():
+    mail_app_titles = ["Mail"]
+    for win in gw.getAllWindows():
+        if any(title in win.title for title in mail_app_titles):
+            return True
+    return False
+# Test Mail Functionality
+def test_mail(root):
+    def check_mail_app_open():
+        if is_mail_app_open():
+            test_button.config(text="Confirm that you have logged in", command=confirm_login)
+        else:
+            root.after(1000, check_mail_app_open)  # Check again after 1 second
+
+    def confirm_login():
+        test_button.config(text="Good Job!", state="disabled")
+
+    # Clear current content
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    # Create main frame
+    main_frame = tk.Frame(root)
+    main_frame.pack(expand=True, fill='both')
+
+    # Test Button
+    test_button = ttk.Button(main_frame, text="Test", command=check_mail_app_open)
+    test_button.pack(pady=10)
+
+    # Main Menu Button
+    main_menu_button = ttk.Button(main_frame, text="Main Menu", command=lambda: create_main_menu(root))
+    main_menu_button.pack(pady=10)
+
+# Function to check if Task Manager is open
+def is_task_manager_open():
+    task_manager_titles = ["Task Manager"]
+    for win in gw.getAllWindows():
+        if any(title in win.title for title in task_manager_titles):
+            return True
+    return False
+
+# Test Task Manager Functionality
+def test_task_manager(root):
+    def check_task_manager_open():
+        if is_task_manager_open():
+            test_button.config(text="Good Job!", state="disabled")
+        else:
+            root.after(1000, check_task_manager_open)  # Check again after 1 second
+
+    # Clear current content
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    # Create main frame
+    main_frame = tk.Frame(root)
+    main_frame.pack(expand=True, fill='both')
+
+    # Test Button
+    test_button = ttk.Button(main_frame, text="Test", command=check_task_manager_open)
+    test_button.pack(pady=10)
+
+    # Main Menu Button
+    main_menu_button = ttk.Button(main_frame, text="Main Menu", command=lambda: create_main_menu(root))
+    main_menu_button.pack(pady=10)
 
 # Function to create the tutorial page
 def create_tutorial_page(root):
@@ -566,7 +783,7 @@ root = tk.Tk()
 root.title("Easy_OS Interface")
 
 # Set the window to full screen
-root.attributes('-fullscreen', True)
+#root.attributes('-fullscreen', True)
 
 # Initialize main menu
 create_main_menu(root)
