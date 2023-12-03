@@ -4,7 +4,7 @@ from PIL import Image, ImageTk
 import threading
 import pyautogui
 import pygame
-
+import time
 
 #initialize pygame mixer
 pygame.mixer.init()
@@ -135,672 +135,279 @@ def create_feature_page(root, feature_name, image_paths):
 
     #############   MOUSE FUNCTIONS     ####################
     def mouse_edge_pt1():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
-
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.1
-        offset_y = new_height * 0.1
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x - offset_x
-        target_y = center_y + offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
+        try:
+            #slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("edge_feature/edge1_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
     def mouse_edge_pt2():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
-
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.15
-        offset_y = new_height * 0.3
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x - offset_x
-        target_y = center_y - offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("edge_feature/edge2_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
     def mouse_file_explorer_pt1():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
-
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.1
-        offset_y = new_height * 0.1
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x - offset_x
-        target_y = center_y + offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("file_explorer_feature/file_explorer1_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
     def mouse_file_explorer_pt2():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("file_explorer_feature/file_explorer2_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.5
-        offset_y = new_height * 0.28
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x - offset_x
-        target_y = center_y - offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
 
     def mouse_file_explorer_pt3():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
-
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.5
-        offset_y = new_height * 0.3
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x - offset_x
-        target_y = center_y + offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("file_explorer_feature/file_explorer3_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
     def mouse_file_explorer_pt4():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("file_explorer_feature/file_explorer4_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.42
-        offset_y = new_height * 0.33
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x - offset_x
-        target_y = center_y - offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
 
 
     def mouse_file_explorer_pt5():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
-
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.26
-        offset_y = new_height * 0.34
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x + offset_x
-        target_y = center_y - offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("file_explorer_feature/file_explorer5_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
     def mouse_create_folder_pt1():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("folder_feature/folder1_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.2
-        offset_y = new_height * 0.08
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x + offset_x
-        target_y = center_y + offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
 
 
     def mouse_create_folder_pt2():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
-
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.105
-        offset_y = new_height * 0.08
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x + offset_x
-        target_y = center_y + offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("folder_feature/folder2_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
     def mouse_create_folder_pt3():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
-
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.2
-        offset_y = new_height * 0.09
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x - offset_x
-        target_y = center_y + offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("folder_feature/folder3_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
     def mouse_mail_app_pt1():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("mail_feature/mail1_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.1
-        offset_y = new_height * 0.1
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x - offset_x
-        target_y = center_y + offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
 
     def mouse_mail_app_pt2():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
-
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.05
-        offset_y = new_height * 0.02
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x + offset_x
-        target_y = center_y - offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("mail_feature/mail2_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
     def mouse_mail_app_pt3():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("mail_feature/mail3_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.25
-        offset_y = new_height * 0.05
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x + offset_x
-        target_y = center_y - offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
 
     def mouse_mail_app_pt4():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
-
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.08
-        offset_y = new_height * 0.18
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x + offset_x
-        target_y = center_y - offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
-
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("mail_feature/mail4_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
     def mouse_mail_app_pt5():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("mail_feature/mail5_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.11
-        offset_y = new_height * 0.082
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x + offset_x
-        target_y = center_y - offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
 
     def mouse_mail_app_pt6():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("mail_feature/mail6_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.4
-        offset_y = new_height * 0.2
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x - offset_x
-        target_y = center_y - offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
 
     def mouse_task_manager_pt1():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("task_manager_feature/task1_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.1
-        offset_y = new_height * 0.1
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x - offset_x
-        target_y = center_y + offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
 
 
     def mouse_task_manager_pt2():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
-
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.015
-        offset_y = new_height * 0.1111
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x + offset_x
-        target_y = center_y - offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
-
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("task_manager_feature/task2_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
     def mouse_task_manager_pt3():
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
-
-        # Calculate the aspect ratio of the original image
-        original_width, original_height = 1400, 950  # Original dimensions of the image
-        aspect_ratio = original_width / original_height
-
-        # Calculate new dimensions of the image based on screen size
-        new_width = screen_width
-        new_height = int(new_width / aspect_ratio)
-
-        if new_height > screen_height:
-            new_height = screen_height
-            new_width = int(new_height * aspect_ratio)
-
-        # Calculate the top left corner of the image (considering letterboxing)
-        image_x = (screen_width - new_width) // 2
-        image_y = (screen_height - new_height) // 2
-
-        # Calculate the center of the image
-        center_x = image_x + new_width // 2
-        center_y = image_y + new_height // 2
-
-        # Calculate 10% of the image's width and height
-        offset_x = new_width * 0.07
-        offset_y = new_height * 0.11
-
-        # Adjust the position to be 10% down and 10% left of the center
-        target_x = center_x + offset_x
-        target_y = center_y - offset_y
-
-        # Move the mouse to the adjusted position
-        pyautogui.moveTo(target_x, target_y, duration=1)
+        try:
+            # slight delay to ensure that screenshot loads before location function
+            time.sleep(0.10)
+            coordinates = pyautogui.locateCenterOnScreen("task_manager_feature/task3_feature.png")
+            if coordinates is not None:
+                pyautogui.moveTo(coordinates)
+            else:
+                print("Image not found on the screen.")
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            import traceback
+            traceback.print_exc()
 
     #############################################################################
 
@@ -834,7 +441,7 @@ def create_feature_page(root, feature_name, image_paths):
         tk_image = ImageTk.PhotoImage(pil_image)
 
         image_label.config(image=tk_image)
-        image_label.image = tk_image  # Keep a reference to prevent garbage collection
+        image_label.image = tk_image
 
         #UPDATE IMAGE FOR EACH MOUSE FUNCTION#############################
         # Start the mouse movement in a separate thread to avoid blocking the GUI
