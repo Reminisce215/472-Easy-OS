@@ -148,6 +148,21 @@ def create_test_knowledge_page(root):
         button = ttk.Button(main_frame, text=text, command=command)
         button.pack(pady=5)
 
+
+
+
+# Add two new functions to play the specific audio files
+def play_folder_start_audio():
+    audio_file = 'folder_test_audio/start_folder_test.mp3'
+    pygame.mixer.music.load(audio_file)
+    pygame.mixer.music.play()
+
+def play_test_success_audio():
+    audio_file = 'folder_test_audio/success.mp3'
+    pygame.mixer.music.load(audio_file)
+    pygame.mixer.music.play()
+
+
 #Test Folder Functionality
 def test_folder(root):
     global is_folder_created
@@ -168,15 +183,23 @@ def test_folder(root):
     def check_folder_creation():
         if is_folder_created:
             test_button.config(text="Good Job!", state="disabled")
+            play_test_success_audio()
         else:
             root.after(1000, check_folder_creation)  # Check again after 1 second
 
-    test_button = ttk.Button(main_frame, text="Test", command=lambda: check_folder_creation())
+    test_button = ttk.Button(main_frame, text="Test", command=lambda: [play_folder_start_audio(), check_folder_creation()])
     test_button.pack(pady=10)
 
     # Main Menu Button
     main_menu_button = ttk.Button(main_frame, text="Main Menu", command=lambda: create_main_menu(root))
     main_menu_button.pack(pady=10)
+
+
+
+def play_edge_start_audio():
+    audio_file = 'edge_test_audio/start_edge_test.mp3'
+    pygame.mixer.music.load(audio_file)
+    pygame.mixer.music.play()
 
 #checks whether edge process is running
 def is_edge_running():
@@ -191,6 +214,7 @@ def test_edge(root):
     def check_edge_running():
         if is_edge_running():
             test_button.config(text="Good Job!", state="disabled")
+            play_test_success_audio()
         else:
             root.after(1000, check_edge_running)  # Check again after 1 second
 
@@ -203,7 +227,7 @@ def test_edge(root):
     main_frame.pack(expand=True, fill='both')
 
     # Test Button
-    test_button = ttk.Button(main_frame, text="Test", command=lambda: check_edge_running())
+    test_button = ttk.Button(main_frame, text="Test", command=lambda: [play_edge_start_audio(),check_edge_running()])
     test_button.pack(pady=10)
 
     # Main Menu Button
@@ -211,6 +235,11 @@ def test_edge(root):
     main_menu_button.pack(pady=10)
 
 
+
+def play_file_explore_start_audio():
+    audio_file = 'file_explorer_test_audio/start_file_explorer_test.mp3'
+    pygame.mixer.music.load(audio_file)
+    pygame.mixer.music.play()
 # Function to check if File Explorer is open
 def is_file_explorer_open():
     explorer_titles = ["Quick access", "Home", "Documents", "Downloads", "Pictures", "Desktop"]
@@ -225,6 +254,7 @@ def test_file_explorer(root):
     def check_file_explorer_open():
         if is_file_explorer_open():
             test_button.config(text="Good Job!", state="disabled")
+            play_test_success_audio()
         else:
             root.after(1000, check_file_explorer_open)  # Check again after 1 second
 
@@ -237,7 +267,7 @@ def test_file_explorer(root):
     main_frame.pack(expand=True, fill='both')
 
     # Test Button
-    test_button = ttk.Button(main_frame, text="Test", command=lambda: check_file_explorer_open())
+    test_button = ttk.Button(main_frame, text="Test", command=lambda: [play_file_explore_start_audio(),check_file_explorer_open()])
     test_button.pack(pady=10)
 
     # Main Menu Button
@@ -250,16 +280,30 @@ def is_mail_app_open():
         if any(title in win.title for title in mail_app_titles):
             return True
     return False
+
+def play_mail_test_start_audio():
+    audio_file = 'mail_test_audio/start_mail_test.mp3'
+    pygame.mixer.music.load(audio_file)
+    pygame.mixer.music.play()
+
+def play_mail_test_login_confirm_audio():
+    audio_file = 'mail_test_audio/mail_confirm.mp3'
+    pygame.mixer.music.load(audio_file)
+    pygame.mixer.music.play()
+
+
 # Test Mail Functionality
 def test_mail(root):
     def check_mail_app_open():
         if is_mail_app_open():
             test_button.config(text="Confirm that you have logged in", command=confirm_login)
+            play_mail_test_login_confirm_audio()
         else:
             root.after(1000, check_mail_app_open)  # Check again after 1 second
 
     def confirm_login():
         test_button.config(text="Good Job!", state="disabled")
+        play_test_success_audio()
 
     # Clear current content
     for widget in root.winfo_children():
@@ -270,13 +314,21 @@ def test_mail(root):
     main_frame.pack(expand=True, fill='both')
 
     # Test Button
-    test_button = ttk.Button(main_frame, text="Test", command=check_mail_app_open)
+    test_button = ttk.Button(main_frame, text="Test",
+                             command=lambda: [play_mail_test_start_audio(), check_mail_app_open()])
     test_button.pack(pady=10)
 
     # Main Menu Button
     main_menu_button = ttk.Button(main_frame, text="Main Menu", command=lambda: create_main_menu(root))
     main_menu_button.pack(pady=10)
 
+
+
+
+def play_task_manager_start_audio():
+    audio_file = 'task_manager_test_audio/start_task_manager_test.mp3'
+    pygame.mixer.music.load(audio_file)
+    pygame.mixer.music.play()
 # Function to check if Task Manager is open
 def is_task_manager_open():
     task_manager_titles = ["Task Manager"]
@@ -290,6 +342,7 @@ def test_task_manager(root):
     def check_task_manager_open():
         if is_task_manager_open():
             test_button.config(text="Good Job!", state="disabled")
+            play_test_success_audio()
         else:
             root.after(1000, check_task_manager_open)  # Check again after 1 second
 
@@ -302,7 +355,8 @@ def test_task_manager(root):
     main_frame.pack(expand=True, fill='both')
 
     # Test Button
-    test_button = ttk.Button(main_frame, text="Test", command=check_task_manager_open)
+    test_button = ttk.Button(main_frame, text="Test",
+                             command=lambda: [play_task_manager_start_audio(), check_task_manager_open()])
     test_button.pack(pady=10)
 
     # Main Menu Button
