@@ -837,7 +837,7 @@ root = tk.Tk()
 root.title("Easy_OS Interface")
 
 # Set the window to full screen
-#root.attributes('-fullscreen', True)
+root.attributes('-fullscreen', True)
 
 # Initialize main menu
 create_main_menu(root)
