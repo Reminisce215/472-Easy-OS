@@ -10,7 +10,7 @@ This application aims to empower them with the confidence and skills needed to u
 This empowerment can lead to increased independence and a better quality of life.
 ## 3. Installation and Usage Instructions:
 ### Installation:
-- Insure you have Python installed on your system.
+- Ensure you have Python installed on your system.
 - Clone the project repository from [GitHub](https://github.com/Reminisce215/472-Easy-OS.git).
 - Install the required dependencies through IDE choice of Pycharm or VSCode
 
