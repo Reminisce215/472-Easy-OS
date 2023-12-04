@@ -51,6 +51,7 @@ This empowerment can lead to increased independence and a better quality of life
 
 ### Test Results:
 - User acceptance testing was performed to validate the user interface's effectiveness.
+- Tested on various monitors to confirm accurate mouse automation across platform. 
 
 ## 6. Discussion and Conclusions:
 ### Project Issues:
