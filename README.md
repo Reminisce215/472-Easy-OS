@@ -1,5 +1,5 @@
 # Project Report Easy OS Interactive Tutorial
-
+Development Team:Nikolay Sisov Nicanor Sanderson
 ## 1. Project Goals:
 The primary objective of the "Easy_OS Interface" project is to develop an intuitive and user-friendly software application to assist elderly users in navigating and understanding basic computer operations. 
 The goal is to simplify tasks like opening applications, managing files, and understanding system functionalities, thus making technology more accessible and less intimidating for senior users.
