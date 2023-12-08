@@ -1,5 +1,5 @@
 # Project Report Easy OS Interactive Tutorial
-
+Development Team:Nikolay Sisov Nicanor Sanderson
 ## 1. Project Goals:
 The primary objective of the "Easy_OS Interface" project is to develop an intuitive and user-friendly software application to assist elderly users in navigating and understanding basic computer operations. 
 The goal is to simplify tasks like opening applications, managing files, and understanding system functionalities, thus making technology more accessible and less intimidating for senior users.
@@ -8,6 +8,7 @@ The goal is to simplify tasks like opening applications, managing files, and und
 This project holds significant value in enhancing the lives of elderly individuals by bridging the digital divide. As technology becomes increasingly integral to daily life, ensuring that older adults are not left behind is crucial. 
 This application aims to empower them with the confidence and skills needed to use a computer, thereby improving their ability to connect with loved ones, access information, and engage in various online activities. 
 This empowerment can lead to increased independence and a better quality of life.
+
 ## 3. Installation and Usage Instructions:
 ### Installation:
 - Ensure you have Python installed on your system.
@@ -20,6 +21,7 @@ This empowerment can lead to increased independence and a better quality of life
 3. Navigate through the tutorials or tests using the on-screen buttons.
 4. Audio guidance will be provided for each test and tutorial.
 5. Tutorials use mouse automation to enhance learning.
+6. Windows OS required for Knowledge Testing
 
 ## 4. Code Structure:
 ![Diagram](diagram/Diagram.png)
@@ -51,6 +53,7 @@ This empowerment can lead to increased independence and a better quality of life
 
 ### Test Results:
 - User acceptance testing was performed to validate the user interface's effectiveness.
+- Tested on various monitors to confirm accurate mouse automation across platform. 
 
 ## 6. Discussion and Conclusions:
 ### Project Issues:

@@ -1,26 +1,27 @@
+import os
+import time
+import threading
 import tkinter as tk
 from tkinter import ttk
-from PIL import Image, ImageTk
-import threading
-import pyautogui
-import pygame
-import time
-import os
+import traceback
 import psutil
+import pygame
+import pyautogui
+from PIL import Image, ImageTk
 import pygetwindow as gw
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 
 # Global variable to track folder creation
-is_folder_created = False
+IS_FOLDER_CREATED = False
 #watchdog observer checks whether a folder has been during runtime
 class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
-        global is_folder_created
+        global IS_FOLDER_CREATED
         if event.is_directory:
             print(f"Directory created: {event.src_path}")
-            is_folder_created = True
+            IS_FOLDER_CREATED = True
 
 def start_watchdog_observer():
     path = os.path.join(os.path.expanduser('~'), 'Desktop')
@@ -31,15 +32,15 @@ def start_watchdog_observer():
     return observer
 
 
-#########################################################################################################################
+####################################################################################################
 
 #initialize pygame mixer
 pygame.mixer.init()
 ###################AUDIO FUNCTIONS#################################################
 # Global variable to track if the menu audio has been played
-has_played_menu_audio = False
+HAS_PLAYED_MENU_AUDIO = False
 # Global variable for sound state
-is_sound_on = True
+IS_SOUND_ON = True
 
 # Function to play menu audio
 def play_menu_audio():
@@ -50,7 +51,7 @@ def play_menu_audio():
 
 # Function to play audio for Edge tutorial
 def play_edge_audio(index):
-    if is_sound_on:
+    if IS_SOUND_ON:
         audio_files = ['edge_audio/edge_pt1.mp3', 'edge_audio/edge_pt2.mp3']
         if index < len(audio_files):
             pygame.mixer.music.load(audio_files[index])
@@ -58,16 +59,22 @@ def play_edge_audio(index):
 
 # Function to play audio for file explorer tutorial
 def play_file_explorer_audio(index):
-    if is_sound_on:
-        audio_files = ['file_explorer_audio/file_pt1.mp3', 'file_explorer_audio/file_pt2.mp3', 'file_explorer_audio/file_pt3.mp3', 'file_explorer_audio/file_pt4.mp3', 'file_explorer_audio/file_pt5.mp3']
+    if IS_SOUND_ON:
+        audio_files = ['file_explorer_audio/file_pt1.mp3',
+                       'file_explorer_audio/file_pt2.mp3',
+                       'file_explorer_audio/file_pt3.mp3',
+                       'file_explorer_audio/file_pt4.mp3',
+                       'file_explorer_audio/file_pt5.mp3']
         if index < len(audio_files):
             pygame.mixer.music.load(audio_files[index])
             pygame.mixer.music.play()
 
 # Function to play audio for Edge tutorial
 def play_folder_audio(index):
-    if is_sound_on:
-        audio_files = ['folder_audio/folder_pt1.mp3', 'folder_audio/folder_pt2.mp3', 'folder_audio/folder_pt3.mp3']
+    if IS_SOUND_ON:
+        audio_files = ['folder_audio/folder_pt1.mp3',
+                       'folder_audio/folder_pt2.mp3',
+                       'folder_audio/folder_pt3.mp3']
         if index < len(audio_files):
             pygame.mixer.music.load(audio_files[index])
             pygame.mixer.music.play()
@@ -75,15 +82,20 @@ def play_folder_audio(index):
 
 # Function to play audio for file explorer tutorial
 def play_mail_audio(index):
-    if is_sound_on:
-        audio_files = ['mail_audio/mail_pt1.mp3', 'mail_audio/mail_pt2.mp3', 'mail_audio/mail_pt3.mp3', 'mail_audio/mail_pt4.mp3', 'mail_audio/mail_pt5.mp3', 'mail_audio/mail_pt6.mp3']
+    if IS_SOUND_ON:
+        audio_files = ['mail_audio/mail_pt1.mp3',
+                       'mail_audio/mail_pt2.mp3',
+                       'mail_audio/mail_pt3.mp3',
+                       'mail_audio/mail_pt4.mp3',
+                       'mail_audio/mail_pt5.mp3',
+                       'mail_audio/mail_pt6.mp3']
         if index < len(audio_files):
             pygame.mixer.music.load(audio_files[index])
             pygame.mixer.music.play()
 
 # Function to play audio for Task Manager tutorial
 def play_task_audio(index):
-    if is_sound_on:
+    if IS_SOUND_ON:
         audio_files = ['task_manager_audio/task_pt1.mp3', 'task_manager_audio/task_pt2.mp3',
                        'task_manager_audio/task_pt3.mp3']  # Add more as needed
         if index < len(audio_files):
@@ -95,10 +107,10 @@ def play_task_audio(index):
 
 # Function to create the main menu
 def create_main_menu(root):
-    global has_played_menu_audio
-    if not has_played_menu_audio:
+    global HAS_PLAYED_MENU_AUDIO
+    if not HAS_PLAYED_MENU_AUDIO:
         play_menu_audio()  # Play menu audio only if it hasn't been played before
-        has_played_menu_audio = True  # sets the flag to True after playing
+        HAS_PLAYED_MENU_AUDIO = True  # sets the flag to True after playing
 
     for widget in root.winfo_children():
         widget.destroy()
@@ -112,7 +124,9 @@ def create_main_menu(root):
     logo.pack(pady=20)
 
     # Tutorial Button
-    tutorial_button = ttk.Button(main_frame, text="Tutorial", command=lambda: create_tutorial_page(root))
+    tutorial_button = ttk.Button(main_frame,
+                                 text="Tutorial",
+                                 command=lambda: create_tutorial_page(root))
     tutorial_button.pack(pady=10)
 
     # Run Test Button
@@ -165,8 +179,8 @@ def play_test_success_audio():
 
 #Test Folder Functionality
 def test_folder(root):
-    global is_folder_created
-    is_folder_created = False
+    global IS_FOLDER_CREATED
+    IS_FOLDER_CREATED = False
 
     # Clear current content
     for widget in root.winfo_children():
@@ -181,7 +195,7 @@ def test_folder(root):
     observer_thread.start()
 
     def check_folder_creation():
-        if is_folder_created:
+        if IS_FOLDER_CREATED:
             test_button.config(text="Good Job!", state="disabled")
             play_test_success_audio()
         else:
@@ -414,9 +428,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as me_error:
+            print(f"Error occurred: {me_error}")
             traceback.print_exc()
 
     def mouse_edge_pt2():
@@ -428,9 +441,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as me_error:
+            print(f"Error occurred: {me_error}")
             traceback.print_exc()
 
     def mouse_file_explorer_pt1():
@@ -442,9 +454,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as mf_error:
+            print(f"Error occurred: {mf_error}")
             traceback.print_exc()
 
     def mouse_file_explorer_pt2():
@@ -456,9 +467,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as mf_error:
+            print(f"Error occurred: {mf_error}")
             traceback.print_exc()
 
 
@@ -471,9 +481,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as mf_error:
+            print(f"Error occurred: {mf_error}")
             traceback.print_exc()
 
     def mouse_file_explorer_pt4():
@@ -485,9 +494,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as mf_error:
+            print(f"Error occurred: {mf_error}")
             traceback.print_exc()
 
 
@@ -501,9 +509,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as mf_error:
+            print(f"Error occurred: {mf_error}")
             traceback.print_exc()
 
     def mouse_create_folder_pt1():
@@ -515,9 +522,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as mc_error:
+            print(f"Error occurred: {mc_error}")
             traceback.print_exc()
 
 
@@ -531,9 +537,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as mc_error:
+            print(f"Error occurred: {mc_error}")
             traceback.print_exc()
 
     def mouse_create_folder_pt3():
@@ -545,9 +550,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as mc_error:
+            print(f"Error occurred: {mc_error}")
             traceback.print_exc()
 
     def mouse_mail_app_pt1():
@@ -559,9 +563,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as mm_error:
+            print(f"Error occurred: {mm_error}")
             traceback.print_exc()
 
 
@@ -574,9 +577,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as mm_error:
+            print(f"Error occurred: {mm_error}")
             traceback.print_exc()
 
     def mouse_mail_app_pt3():
@@ -588,9 +590,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as mm_error:
+            print(f"Error occurred: {mm_error}")
             traceback.print_exc()
 
 
@@ -603,9 +604,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as mm_erorr:
+            print(f"Error occurred: {mm_erorr}")
             traceback.print_exc()
     def mouse_mail_app_pt5():
         try:
@@ -616,9 +616,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as mm_error:
+            print(f"Error occurred: {mm_error}")
             traceback.print_exc()
 
 
@@ -631,9 +630,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as mm_error:
+            print(f"Error occurred: {mm_error}")
             traceback.print_exc()
 
 
@@ -646,9 +644,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as tm_error:
+            print(f"Error occurred: {tm_error}")
             traceback.print_exc()
 
 
@@ -662,9 +659,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as tm_error:
+            print(f"Error occurred: {tm_error}")
             traceback.print_exc()
     def mouse_task_manager_pt3():
         try:
@@ -675,9 +671,8 @@ def create_feature_page(root, feature_name, image_paths):
                 pyautogui.moveTo(coordinates)
             else:
                 print("Image not found on the screen.")
-        except Exception as e:
-            print(f"Error occurred: {e}")
-            import traceback
+        except Exception as tm_error:
+            print(f"Error occurred: {tm_error}")
             traceback.print_exc()
 
     #############################################################################
@@ -789,10 +784,10 @@ def create_feature_page(root, feature_name, image_paths):
         ###################################################################
 
     def toggle_sound():
-        global is_sound_on
-        is_sound_on = not is_sound_on
-        sound_off_button.config(text="Sound On" if is_sound_on else "Sound Off")
-        if not is_sound_on:
+        global IS_SOUND_ON
+        IS_SOUND_ON = not IS_SOUND_ON
+        sound_off_button.config(text="Sound On" if IS_SOUND_ON else "Sound Off")
+        if not IS_SOUND_ON:
             pygame.mixer.music.stop()  # Stop playing any ongoing audio
 
     # Clear current content
